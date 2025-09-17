@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matterport Türkiye – Fiyat Teklifi (PDF çıktılı)</title>
+  <style>
+    :root{
+      --ink:#0b1220;--muted:#5b6577;--line:#e6eaf0;--brand:#0ea5e9;--bg:#f7f9fc;--chip:#ecfdf5;--chipBorder:#c7f2e6;--chipText:#0f5132
+    }
+    html,body{background:var(--bg); color:var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    .container{max-width:1056px; margin:20px auto; padding:20px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 10px 28px rgba(2,8,23,.06)}
+    header{display:flex; gap:16px; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:10px}
+    header h1{font-size:22px; line-height:1.2; margin:0; letter-spacing:.2px}
+    .logo{height:48px; aspect-ratio:4/1; object-fit:contain}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .card{border:1px solid var(--line); border-radius:14px; padding:10px}
+    .card h3{margin:0 0 8px 0; font-size:13px; letter-spacing:.2px; color:var(--muted); text-transform:uppercase}
+    label{font-size:11px; color:var(--muted)}
+    input[type="text"], input[type="number"], input[type="date"], textarea{width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:#fff; font-size:13px}
+    textarea{min-height:76px}
+    .actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:flex-end; margin-top:8px}
+    button{appearance:none; border:1px solid var(--brand); background:var(--brand); color:#fff; padding:9px 12px; border-radius:10px; font-weight:600; cursor:pointer; font-size:13px}
+    button.ghost{background:#fff; color:var(--brand)}
+    table{width:100%; border-collapse:collapse;}
+    th, td{border-bottom:1px solid var(--line); padding:8px; font-size:13px; text-align:left; vertical-align:top}
+    th{font-size:11px; color:var(--muted); font-weight:700}
+    .right{text-align:right}
+    .nowrap{white-space:nowrap}
+    .small{font-size:11px; color:var(--muted)}
+    .total-line{display:flex; justify-content:space-between; gap:8px; padding:5px 0; border-bottom:1px dashed var(--line)}
+    .total-line strong{font-size:15px}
+    .totals{border:1px solid var(--line); border-radius:12px; padding:10px}
+    .signature{height:56px; border:1px dashed var(--line); border-radius:8px}
+
+    /* hizmet listesi modern kutucuk */
+    .services{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px}
+    .svc{display:grid; grid-template-columns:auto 1fr 140px; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; transition:all .15s ease}
+    .svc:hover{box-shadow:0 4px 10px rgba(0,0,0,.04)}
+    .chk{appearance:none; width:18px; height:18px; border-radius:6px; border:2px solid #9ca3af; display:inline-grid; place-content:center; cursor:pointer; background:#fff}
+    .chk:checked{border-color:#10b981; background:#10b981}
+    .chk:checked::after{content:""; width:6px; height:10px; border:2px solid #fff; border-top-color:transparent; border-left-color:transparent; transform:rotate(45deg); margin-top:-2px}
+    .svc input[type="number"]{width:100%; text-align:right}
+
+    .print-hidden{display:block}
+    .print-only{display:none}
+
+    /* footer */
+    .footer{margin-top:14px; padding-top:8px; border-top:1px solid var(--line); font-size:8pt; color:var(--muted); text-align:center}
+
+    /* Daha sıkı A4 baskı */
+    @page{ size:A4; margin:12mm }
+    @media print{
+      html,body{background:#fff}
+      body{font-size:12px}
+      .container{box-shadow:none; border:none; padding:0; margin:0}
+      .print-hidden{display:none !important}
+      .print-only{display:block}
+      header{border:none; padding-bottom:0}
+      *{page-break-inside:avoid}
+      a[href]:after{content:""}
+      button{display:none}
+      input, textarea, select{border:none}
+      .card{border:none; padding:6px}
+      .actions{display:none}
+      .footer{position:fixed; bottom:6mm; left:12mm; right:12mm; background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="page">
+    <header class="print-hidden">
+      <div style="display:flex;align-items:center;gap:16px">
+        <img id="logoImg" class="logo" alt="Matterport Türkiye" src="https://matterporttr.com/wp-content/uploads/2024/12/matterport-tr-logo-dark.png" onerror="this.style.display='none'"/>
+        <div>
+          <h1>Matterport Türkiye – Fiyat Teklifi</h1>
+          <div class="small">Sanal tur • sanal tur fiyatı • sanal tur çekimi • 3 boyutlu tur • 3 boyutlu çekim</div>
+        </div>
+      </div>
+      <div class="print-hidden" style="text-align:right">
+        <label for="logoUrl">Logo URL</label>
+        <input id="logoUrl" type="text" placeholder="https://.../logo.png" />
+      </div>
+    </header>
+
+    <!-- === EDITÖR (Sadece ekranda) === -->
+    <section class="editor print-hidden" style="margin-top:12px">
+      <div class="card">
+        <h3>Özet Kutuları</h3>
+        <div class="grid">
+          <div>
+            <label>Proje Adı</label>
+            <input id="projectName" type="text" placeholder="Örn: Euro Park Hotel Sanal Tur Projesi" />
+          </div>
+          <div>
+            <label>Teklif Fiyatı (TL) – Hizmetler toplamından otomatik</label>
+            <input id="offerPrice" type="number" placeholder="0" disabled />
+          </div>
+          <div>
+            <label>Teslim Süresi (iş günü)</label>
+            <input id="leadDays" type="number" placeholder="10" />
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3>Teklif Bilgileri</h3>
+          <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div>
+              <label>Teklif No</label>
+              <input id="quoteNo" type="text" placeholder="MT-2025-001" />
+            </div>
+            <div>
+              <label>Tarih</label>
+              <input id="quoteDate" type="date" />
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <label>Geçerlilik (gün)</label>
+            <input id="validDays" type="number" min="1" value="15" />
+          </div>
+        </div>
+        <div class="card">
+          <h3>Müşteri Bilgileri</h3>
+          <div style="margin-bottom:8px">
+            <label>Unvan / İsim</label>
+            <input id="clientName" type="text" placeholder="Firma / Kişi adı" />
+          </div>
+          <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div>
+              <label>E‑posta</label>
+              <input id="clientEmail" type="text" placeholder="mail@ornek.com" />
+            </div>
+            <div>
+              <label>Telefon</label>
+              <input id="clientPhone" type="text" placeholder="05xx xxx xx xx" />
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <label>Adres</label>
+            <input id="clientAddr" type="text" placeholder="Adres" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px; margin-bottom:8px">
+          <h3>Hizmetlerimiz (işaretleyin ve fiyat girin)</h3>
+        </div>
+        <div class="services" id="svcList"></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3>Açıklama Metni</h3>
+        <textarea id="descText" placeholder="PDF’teki gibi kısa açıklama/metin…"></textarea>
+      </div>
+
+      <div class="grid" style="margin-top:12px; align-items:start">
+        <div class="card">
+          <h3>Ek Masraflar</h3>
+          <div id="charges"></div>
+          <div class="actions">
+            <button class="ghost" type="button" onclick="addCharge()">+ Masraf Satırı</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Detay Kalemler (opsiyonel)</h3>
+          <table id="itemsTbl">
+            <thead>
+              <tr>
+                <th>Hizmet</th><th>Açıklama</th><th>Birim</th><th>Adet</th><th>İskonto%</th><th class="right">Tutar</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="itemBody"></tbody>
+          </table>
+          <div class="actions">
+            <button type="button" class="ghost" onclick="addRow()">+ Kalem Ekle</button>
+            <button type="button" onclick="clearRows()">Temizle</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions" style="justify-content:space-between; margin-top:12px">
+        <button type="button" class="ghost" onclick="prefillMatterport()">Örnekleri Yükle</button>
+        <div>
+          <button type="button" class="ghost" onclick="togglePreview(true)">Önizlemeyi Aç</button>
+          <button type="button" onclick="window.print()">PDF / Yazdır</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- === RENDER (PDF çıktısı – yalnızca yazdır ve önizlemede) === -->
+    <section class="render" id="render" style="display:none">
+      <div style="text-align:center; margin-bottom:6px">
+        <img class="logo" alt="logo" id="rLogo" src="https://matterporttr.com/wp-content/uploads/2024/12/matterport-tr-logo-dark.png"/>
+        <div style="font-size:22px; font-weight:800; margin-top:6px">FİYAT TEKLİFİ</div>
+        <div style="margin-top:6px; font-size:13px"><strong>Sayın;</strong> <span id="rSalutation">—</span></div>
+      </div>
+
+      <!-- ÜST: Sol proje/desc, Sağ Teklif Bilgileri -->
+      <div class="grid" style="grid-template-columns:2fr 1fr; gap:10px; margin-top:6px">
+        <div class="card" style="padding:12px">
+          <div style="font-size:16px; font-weight:700" id="rProject">—</div>
+          <div class="small" id="rDesc" style="margin-top:6px; line-height:1.55"></div>
+        </div>
+        <div class="card" style="padding:12px; display:grid; gap:6px">
+          <h3>Teklif Bilgileri</h3>
+          <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+            <div><div class="small">Teklif No</div><div id="rNo">—</div></div>
+            <div><div class="small">Tarih</div><div id="rDate">—</div></div>
+            <div><div class="small">Geçerlilik</div><div id="rValid">—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:8px; padding:10px">
+        <h3>Müşteri Bilgileri</h3>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div><div class="small">Unvan / İsim</div><div id="rClient">—</div></div>
+          <div><div class="small">İletişim</div><div id="rContact">—</div></div>
+        </div>
+        <div class="small" id="rAddr" style="margin-top:4px"></div>
+      </div>
+
+      <div class="card" style="margin-top:8px; padding:10px">
+        <h3>Hizmetler</h3>
+        <table>
+          <thead>
+            <tr><th>Hizmet</th><th class="right">Tutar (TL)</th></tr>
+          </thead>
+          <tbody id="rSvcTbody"></tbody>
+          <tfoot>
+            <tr><td class="right"><strong>Hizmetler Toplamı</strong></td><td class="right"><strong id="rSvcTotal">₺0,00</strong></td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- NOT KUTUSU -->
+      <div class="card" style="margin-top:8px; padding:10px">
+        <h3>Lütfen dikkate alınması gereken önemli noktalar:</h3>
+        <div style="border:1px solid var(--line); border-radius:10px; padding:10px; text-align:left; line-height:1.55">
+          Bu fiyat, projenin kapsamına, teklif harici istenen özelliklere ve süresine bağlı olarak değişkenlik gösterebilir. Ödeme koşulları ve projenin başlama tarihi, sizinle daha fazla ayrıntı paylaştığınızda belirlenecektir.<br/>
+          Bu teklifi inceledikten sonra, herhangi bir sorunuz veya ek istekleriniz olursa lütfen bize bildirin. Size en iyi hizmeti sunmak için buradayız ve işbirliğimize başlamaktan memnuniyet duyarız.
+        </div>
+      </div>
+
+      <!-- ALTTA: Tutarlar -->
+      <div class="totals" style="margin-top:8px">
+        <div class="total-line"><span>Teklif Fiyatı (Hizmetler + Kalemler + Masraflar)</span><strong id="rOffer">₺0,00 + KDV</strong></div>
+        <div class="total-line"><span>KDV (%20)</span><strong id="rVat">₺0,00</strong></div>
+        <div class="total-line"><span>Genel Toplam</span><strong id="rGrand">₺0,00</strong></div>
+        <div class="total-line"><span>Teslim Süresi</span><strong id="rLead">— iş günü</strong></div>
+      </div>
+
+      <div class="footer">
+        Adres: Mevlana Cd. No:108 Kat:9 D:49 Zeytinburnu/İstanbul | Web: www.matterporttr.com<br/>
+        Tel: +90 501 580 01 01 - +90 501 480 01 01 | E-mail: info@matterporttr.com - proje@matterporttr.com
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const fmt = new Intl.NumberFormat('tr-TR', { style:'currency', currency:'TRY', minimumFractionDigits:2 });
+    const el = id => document.getElementById(id);
+    const VAT = 0.20; // KDV sabit %20
+    function todayISO(){ const d=new Date(); const off=d.getTimezoneOffset(); return new Date(d-off*60*1000).toISOString().split('T')[0]; }
+
+    const SERVICES = ['Sanal Tur Çekimi (Pro2/Pro3)','HD Fotoğraf Çekimi','Panorama Noktaları','1 Yıllık Barındırma','Drone Dış Çekim','Web Entegrasyonu','Mattertag İçerik Çalışması','Kat Planı (Floor Plan) – DXF/PNG','VR Uyumluluk','Ek Oda / Alan Çekimi','Tanıtım Video Kırpımları','Eğitim / Kullanım Dokümantasyonu','Bakım / Servis'];
+
+    function renderServices(){
+      const wrap = el('svcList'); wrap.innerHTML='';
+      SERVICES.forEach(name=>{
+        const row=document.createElement('label');
+        row.className='svc';
+        row.innerHTML=`<input class="chk" type="checkbox" data-name="${name}"><span>${name}</span><input class="svcPrice" type="number" min="0" step="0.01" placeholder="0" />`;
+        wrap.appendChild(row);
+      });
+      wrap.querySelectorAll('.chk, .svcPrice').forEach(inp=> inp.addEventListener('input', calc));
+    }
+
+    function addRow(data={}){ const tb=el('itemBody'); const tr=document.createElement('tr'); tr.innerHTML=`<td><input type="text" value="${data.name||''}"></td><td><input type="text" value="${data.desc||''}"></td><td><input type="number" min="0" step="0.01" value="${data.unit||''}"></td><td><input type="number" min="0" step="1" value="${data.qty||1}"></td><td><input type="number" min="0" max="100" step="1" value="${data.disc||0}"></td><td class='right amount'>₺0,00</td><td class='print-hidden'><button type='button' class='ghost' onclick="this.closest('tr').remove(); calc()">Sil</button></td>`; tb.appendChild(tr); [...tr.querySelectorAll('input')].forEach(inp=> inp.addEventListener('input', calc)); calc(); }
+    function clearRows(){ el('itemBody').innerHTML=''; calc(); }
+
+    function addCharge(data={}){ const wrap=el('charges'); const row=document.createElement('div'); row.style.display='grid'; row.style.gridTemplateColumns='1fr 120px auto'; row.style.gap='8px'; row.style.marginBottom='8px'; row.innerHTML=`<input type='text' placeholder='Gümrük / Nakliye / Konaklama' value='${data.title||''}'><input type='number' min='0' step='0.01' value='${data.value||''}'><button type='button' class='ghost print-hidden' onclick='this.parentElement.remove(); calc()'>Kaldır</button>`; wrap.appendChild(row); row.querySelectorAll('input').forEach(i=> i.addEventListener('input', calc)); calc(); }
+
+    function calc(){
+      // 1) Hizmetler toplamı (seçilen + fiyat girilen)
+      let svcTotal = 0; const rSvcBody = el('rSvcTbody'); rSvcBody.innerHTML='';
+      document.querySelectorAll('#svcList .svc').forEach(row=>{
+        const chk = row.querySelector('.chk'); const priceInp = row.querySelector('.svcPrice');
+        const price = parseFloat(priceInp.value||0);
+        if(chk.checked){ svcTotal += price; const tr=document.createElement('tr'); tr.innerHTML = `<td>${chk.dataset.name}</td><td class='right'>${fmt.format(price||0)}</td>`; rSvcBody.appendChild(tr); }
+      });
+      el('rSvcTotal').textContent = fmt.format(svcTotal);
+
+      // 2) Detay kalemler
+      let sub=0, discTotal=0; document.querySelectorAll('#itemBody tr').forEach(tr=>{ const [name,desc,unit,qty,disc]=tr.querySelectorAll('input'); const u=parseFloat(unit.value||0), q=parseFloat(qty.value||0), d=Math.min(100,Math.max(0,parseFloat(disc.value||0))); const gross=u*q; const discount=gross*(d/100); const net=gross-discount; sub+=net; discTotal+=discount; tr.querySelector('.amount').textContent=fmt.format(net||0); });
+
+      // 3) Ek masraflar
+      let charges=0; document.querySelectorAll('#charges > div').forEach(div=>{ charges += parseFloat(div.children[1].value||0); });
+
+      // 4) Toplamlar
+      const base = svcTotal + sub + charges; // Teklif Fiyatı artık buradan geliyor
+      const vat = base*VAT; const grand = base+vat;
+
+      // 5) Editor alanı ile senkron
+      el('offerPrice').value = base.toFixed(2);
+
+      // 6) Render alanını doldur
+      el('rProject').textContent = el('projectName').value || '—';
+      el('rOffer').textContent = fmt.format(base||0) + ' + KDV';
+      el('rVat').textContent = fmt.format(vat);
+      el('rGrand').textContent = fmt.format(grand);
+      el('rLead').textContent = (el('leadDays').value||'—') + ' iş günü';
+
+      el('rNo').textContent = el('quoteNo').value||'—';
+      el('rDate').textContent = el('quoteDate').value||todayISO();
+      const days = parseInt(el('validDays').value||0); const start = new Date(el('quoteDate').value||todayISO()); const valid = new Date(start.getTime()); valid.setDate(valid.getDate()+(isNaN(days)?0:days)); const vTxt = valid.toLocaleDateString('tr-TR');
+      el('rValid').textContent = vTxt;
+
+      el('rClient').textContent = el('clientName').value||'—';
+      el('rSalutation').textContent = el('clientName').value||'—';
+      el('rContact').textContent = `${el('clientEmail').value||''} ${el('clientPhone').value||''}`.trim();
+      el('rAddr').textContent = el('clientAddr').value||'';
+
+      el('rDesc').textContent = el('descText').value || '—';
+    }
+
+    function prefillMatterport(){
+      el('descText').value = 'Otel tesis alanları ve belirlenen oda tiplerinin profesyonel 3B sanal tur çekimi, HD fotoğraflar ve web entegrasyonu dahildir. İçerik, VR uyumludur.';
+      clearRows(); addRow({name:'Sanal Tur Çekimi', desc:'Pro2 ile 3B çekim – 0-500 m²', unit:10000, qty:1, disc:0}); addRow({name:'Mattertag İçerik Çalışması', desc:'10 adet etiket', unit:250, qty:10, disc:0}); addCharge({title:'Lojistik (varsayımsal)', value:0});
+      // bazı hizmetleri örnek fiyatlarla işaretle
+      const svcRows = document.querySelectorAll('#svcList .svc');
+      const examples = [
+        {idx:0, val:25000}, // Sanal Tur Çekimi
+        {idx:1, val:5000},  // HD Fotoğraf Çekimi
+        {idx:6, val:2500}   // Mattertag
+      ];
+      examples.forEach(e=>{ const row=svcRows[e.idx]; if(row){ row.querySelector('.chk').checked=true; row.querySelector('.svcPrice').value=e.val; }});
+      calc();
+    }
+
+    function togglePreview(show){ const r=el('render'); if(show){ r.style.display='block'; r.scrollIntoView({behavior:'smooth'}); } else { r.style.display='none'; } calc(); }
+
+    function init(){ renderServices(); el('quoteDate').value=todayISO(); ['projectName','leadDays','quoteNo','quoteDate','validDays','clientName','clientEmail','clientPhone','clientAddr','descText'].forEach(id=> el(id).addEventListener('input', calc)); el('logoUrl').addEventListener('input', e=>{ el('rLogo').src = e.target.value || 'https://matterporttr.com/wp-content/uploads/2024/12/matterport-tr-logo-dark.png';}); calc(); }
+    init();
+  </script>
+</body>
+</html>
